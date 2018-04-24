@@ -16,6 +16,7 @@ function ListController() {
   vm.add = add;
   vm.startAdd = startAdd;
   vm.startEdit = startEdit;
+  vm.startRemove = startRemove;
   vm.isInAddMode = isInAddMode;
   vm.isInReadMode = isInReadMode;
   vm.isInEditMode = isInEditMode;
@@ -61,20 +62,33 @@ function ListController() {
     vm.currentTask = {};
   }
 
+  function startEdit(id) {
+    reset();
+    selectedId = id;
+    editFlag = true;
+    for (var i = 0; i < vm.list.tasks.length; i++) {
+      var task = vm.list.tasks[i];
+      if (task.id == id) {
+        vm.currentTask.name = task.name
+        vm.currentTask.completed = task.completed
+      }
+    }
+  }
+
+  function startRemove() {
+
+  }
+
   function isInAddMode() {
     return addFlag;
   }
 
-  function startEdit() {
-
+  function isInEditMode(id) {
+    return selectedId == id && editFlag
   }
 
-  function isInEditMode() {
-
-  }
-
-  function isInReadMode() {
-    return true;
+  function isInReadMode(id) {
+    return selectedId < 0 || selectedId != id;
   }
 
   function add() {

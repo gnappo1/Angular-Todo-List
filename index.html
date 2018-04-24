@@ -25,7 +25,7 @@
 
       <div ng-repeat="task in vm.list.tasks | orderBy: '$index'">
 
-        <div ng-show="vm.isInReadMode()">
+        <div ng-show="vm.isInReadMode(task.id)">
           <h4><strong>{{$index + 1}}: {{task.name}}</strong> - {{task.completed && "Completed!" || "To complete "}}</h4>
 
           <!-- Task Options -->
