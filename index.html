@@ -5,7 +5,16 @@
     <title>To Do List</title>
   </head>
   <body ng-app="todoApp">
-    <h1>This is our Angular App</h1>
+    <div ng-controller="ListController as vm">
+      <h1>{{vm.list.name}}</h1>
+      <div ng-repeat="task in vm.list.tasks | orderBy: '$index'">
+        <h1>{{$index + 1}}: {{task.name}}</h1>
+        <h4>{{task.completed && "Completed!" || "Still to complete "}}</h4>
+      </div>
+    </div>
 
+    <script src="./js/angular.js"></script>
+    <script src="./js/app/app.js"></script>
+    <script src="./js/app/list/list.controller.js"></script>
   </body>
 </html>
