@@ -21,10 +21,42 @@
         <button ng-click="vm.add()">Add</button>
       </div>
 
+      <!-- Tasks -->
+
       <div ng-repeat="task in vm.list.tasks | orderBy: '$index'">
-        <h1>{{$index + 1}}: {{task.name}}</h1>
-        <h4>{{task.completed && "Completed!" || "Still to complete "}}</h4>
+
+        <div ng-show="vm.isInReadMode()">
+          <h4><strong>{{$index + 1}}: {{task.name}}</strong> - {{task.completed && "Completed!" || "To complete "}}</h4>
+
+          <!-- Task Options -->
+
+          <button ng-click="vm.startEdit(task.id)">Edit</button>
+          <button ng-click="vm.startRemove(task.id)">Delete</button>
+
+          <!-- End of Task Options -->
+        </div>
+
+        <!-- Edit Task -->
+        <div ng-show="vm.isInEditMode(task.id)">
+          <input placeholder="task name"
+                 ng-model="vm.currentTask.name">
+          <input type="checkbox"
+                 ng-true-value="true"
+                 ng-false-value="false"
+                 ng-model="vm.currentTask.completed">
+          <button ng-click="vm.save()">
+            Save
+          </button>
+
+          <button ng-click="vm.cancel()">
+            Cancel
+          </button>
+
+        </div>
+
       </div>
+
+
     </div>
 
     <script src="./js/angular.js"></script>
