@@ -97,8 +97,15 @@ function ListController() {
     reset();
   }
 
-  function save() {
-
+  function save(id) {
+    for (var i = 0; i < vm.list.tasks.length; i++) {
+      var task = vm.list.tasks[i];
+      if (task.id == selectedId) {
+        task.name = vm.currentTask.name
+        task.completed = vm.currentTask.completed
+        reset()
+      }
+    }
   }
 
   function cancel() {
