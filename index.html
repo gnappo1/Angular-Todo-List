@@ -19,6 +19,7 @@
         <input placeholder="task name"
                ng-model="vm.currentTask.name">
         <button ng-click="vm.add()">Add</button>
+        <button ng-click="vm.cancel()">Cancel</button>
       </div>
 
       <!-- Tasks -->
@@ -52,6 +53,19 @@
             Cancel
           </button>
 
+        </div>
+
+        <!-- Delete Task -->
+
+        <div ng-show="vm.isInRemoveMode(task.id)">
+          <h4><strong>{{$index + 1}}: {{task.name}}</strong> - {{task.completed && "Completed!" || "To complete "}}</h4>
+
+          <button ng-click="vm.remove(task.id)">
+            Confirm
+          </button>
+          <button ng-click="vm.cancel()">
+            Cancel
+          </button>
         </div>
 
       </div>

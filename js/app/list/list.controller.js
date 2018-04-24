@@ -20,8 +20,10 @@ function ListController() {
   vm.isInAddMode = isInAddMode;
   vm.isInReadMode = isInReadMode;
   vm.isInEditMode = isInEditMode;
+  vm.isInRemoveMode = isInRemoveMode;
   vm.save = save;
   vm.cancel = reset;
+  vm.remove = remove;
 
   vm.list = {
     name: 'Todo List',
@@ -93,6 +95,10 @@ function ListController() {
     return selectedId < 0 || selectedId != id;
   }
 
+  function isInRemoveMode(id) {
+    return selectedId == id && removeFlag;
+  }
+
   function add() {
     vm.currentTask.completed = false;
     vm.list.tasks.push(vm.currentTask);
@@ -105,6 +111,16 @@ function ListController() {
       if (task.id == selectedId) {
         task.name = vm.currentTask.name
         task.completed = vm.currentTask.completed
+        reset()
+      }
+    }
+  }
+
+  function remove(id) {
+    for (var i = 0; i < vm.list.tasks.length; i++) {
+      var task = vm.list.tasks[i];
+      if (task.id == selectedId) {
+        vm.list.tasks.splice(i, 1)
         reset()
       }
     }
