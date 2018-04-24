@@ -21,7 +21,7 @@ function ListController() {
   vm.isInReadMode = isInReadMode;
   vm.isInEditMode = isInEditMode;
   vm.save = save;
-  vm.cancel = cancel;
+  vm.cancel = reset;
 
   vm.list = {
     name: 'Todo List',
@@ -75,8 +75,10 @@ function ListController() {
     }
   }
 
-  function startRemove() {
-
+  function startRemove(id) {
+    reset();
+    selectedId = id;
+    removeFlag = true;
   }
 
   function isInAddMode() {
@@ -106,10 +108,6 @@ function ListController() {
         reset()
       }
     }
-  }
-
-  function cancel() {
-
   }
 
 }
